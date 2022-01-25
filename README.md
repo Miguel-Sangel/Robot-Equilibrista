@@ -42,16 +42,25 @@ Abriendo una terminal de Ubuntu teclearemos las siguientes instrucciones:
 	- sudo apt-get update
 	- sudo apt-get install ros-kinetic-desktop-full
  
- - echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
- - source ~/.bashrc
+ 	- echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+	- source ~/.bashrc
 
 Con esto tendremos instalado ROS, ahora instalaremos otros paquetes que nos ampliaran las capacidades de ROS.
 
 Rosbridge_suit, http://wiki.ros.org/rosbridge_suite, es una herramienta que nos permite conectar con el sistema ROS del robot a traves de una pagina web.
 
- - sudo apt-get install ros-kinetic-rosbridge-server
+ 	- sudo apt-get install ros-kinetic-rosbridge-server
 
 Usb_cam, http://wiki.ros.org/usb_cam, paquete que permite el acceso de ROS a los datos devueltos por la Camara USB.
 
- - sudo apt-get install ros-kinetic-usb-cam
+ 	- sudo apt-get install ros-kinetic-usb-cam
+
+Web_video_serve, http://wiki.ros.org/web_video_server, este paquete transmite temas de ROS con contenido de video para poder ser leido en una pagina web.
+
+	- sudo apt-get install ros-kinetic-web-video-server
+
+Ahora crearemos un espacio de trabajo para contener nuestro proyecto. Para esto crearemos una carpeta con el nombre que deseemos, por ejemplo "equilibrista" y dentro de ella una que deve llamarse "src".
+
+	- mkdir -p ~/equilibrista/src
+	- cd ~/equilibrista/src
  
