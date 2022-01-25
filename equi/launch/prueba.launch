@@ -1,4 +1,0 @@
-<launch>
-  <node name="motor" type="motor_prueba" pkg="equi" respawn="false" output="screen"/>
-  
-</launch>

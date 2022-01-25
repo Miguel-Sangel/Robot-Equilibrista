@@ -1,4 +1,0 @@
-<launch>
-  <node name="motor" type="motor" pkg="equi" respawn="false" output="screen"/>
-  <!--node name="odom" type="odom" pkg="equi" respawn="false" output="screen" /-->
-</launch>
