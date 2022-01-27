@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="es">
+
+<HEAD>
+
+	<TITLE> Miguel Angel Rodriguez Garcia </TITLE>	
+	<meta charset="UTF-8"/>
+	<LINK href="CSS.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="roslib.min.js"></script>
+    <script type="text/javascript" src="roslib.js"></script>
+
+	<script type="text/javascript" type="text/javascript">
+	// Connecting to ROS
+     	// -----------------
+   
+     	var ros = new ROSLIB.Ros({
+       		url : 'ws://localhost:9090'
+     	});
+   
+     	ros.on('connection', function() {
+       		console.log('Connected to websocket server.');
+     	});
+   
+     	ros.on('error', function(error) {
+       		console.log('Error connecting to websocket server: ', error);
+     	});
+   
+     	ros.on('close', function() {
+       		console.log('Connection to websocket server closed.');
+     	});
+
+
+
+	var Tema_comando = new ROSLIB.Topic({
+	ros : ros,
+       	name : '/tema_comando',
+       	messageType : 'std_msgs/Int16'
+       	});
+
+	var Tema_destino = new ROSLIB.Topic({
+	ros : ros,
+       	name : '/tema_destino',
+       	messageType : 'std_msgs/Int16'
+       	});
+
+	var comand = new ROSLIB.Message({
+	data : 0
+     	});
+
+	var destino = new ROSLIB.Message({
+	data : 0
+     	});
+
+
+	function f1(a) {comand.data = a; destino.data = 0; Tema_comando.publish(comand); Tema_destino.publish(destino); }
+
+	function f2(a) {destino.data = a; Tema_destino.publish(destino);}
+
+	var Tema_velocidad = new ROSLIB.Topic({
+	ros : ros,
+   	name : '/tema_velocidad',
+   	messageType : 'std_msgs/Int16'
+   	});
+
+	var Velocidad = new ROSLIB.Message({
+	data : 0
+   	});
+
+	var Tema_giro = new ROSLIB.Topic({
+	ros : ros,
+   	name : '/tema_giro',
+   	messageType : 'std_msgs/Int16'
+   	});
+
+	var giro = new ROSLIB.Message({
+	data : 0
+   	});
+
+	function f3() { Velocidad.data = (parseFloat (document.getElementById("velocidad").value)); 							Tema_velocidad.publish(Velocidad); }
+	function f4() { giro.data = (parseFloat (document.getElementById("angular").value));
+			Tema_giro.publish(giro);
+	}
+
+
+
+	var escucha_datos = new ROSLIB.Topic({
+       	ros : ros,
+       	name : '/tema_datos',
+       	messageType : 'agv/datos'
+     	});
+  
+     	escucha_datos.subscribe(function(message) {
+      	console.log('Received message on ' + escucha_datos.name + ': ' + message.data);
+	document.getElementById('etiq_id_0').innerHTML=message.Etiq_1;
+       	escucha_datos.unsubscribe();
+     	});
+
+  
+     	escucha_datos.subscribe(function(message) {
+       	console.log('Received message on ' + escucha_Etiq_1.name + ': ' + message.data);
+	document.getElementById('etiq_id_1').innerHTML=message.Etiq_2;
+       	escucha_datos.unsubscribe();
+     	});
+
+
+
+
+	</script>	
+
+</HEAD>
+
+
+
+
+
+<BODY Class="uno">
+<center><P><H2>- CONTROLADOR AGV -</H2></P>
+
+		<table WIDTH = "95%"  BORDER ="1" >
+
+			<tr>
+				<td align="center" colspan=3 rowspan=2>
+					<iframe src="http://localhost:8080/stream?topic=/camara/image_raw&type=ros_compressed" width="600" height="350" scrolling=no></iframe>
+				</td>
+				<td align="center"> 
+					<button onclick="f1(3)"><img src="FLECHA-I.jpg"> </img></button>
+ 				</td>
+				<td align="center"> 
+					<button onclick="f1(1)"><img src="FLECHA-A.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(2)"><img src="FLECHA-D.jpg"> </img></button>
+ 				</td>
+			</tr>
+			<tr>	
+				<td align="center">
+					<button onclick="f1(5)"><img src="GIRO-I.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(0)"><img src="STOP.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(4)"><img src="GIRO-D.jpg"> </img></button>
+ 				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<h4>CONTROLES</H4>
+				</td>
+				<td align="center">
+					<button onclick="f2(1)"><img src="EP1.jpg"> </img></button>
+
+				</td>
+				<td align="center">
+					<button onclick="f2(2)"><img src="EP2.jpg"> </img></button>
+
+				</td>
+				<td align="center">
+					<button onclick="f2(3)"><img src="EP3.jpg"> </img></button>
+
+				</td>
+				<td align="center">
+					<button onclick="f2(4)"><img src="EP4.jpg"> </img></button>
+
+				</td>
+				<td align="center">
+					<button onclick="f2(5)"><img src="EP5.jpg"> </img></button>
+
+				</td>
+			</tr> 
+			<tr>
+				<td align="center">
+				VELOCIDAD
+					<input type="range" id="velocidad" min="0" max="10" step="1" value="0" oninput="f3(this.value)"/>
+				</td>
+				<td align="center" rowspan=3>
+					<img src="P1.jpg"> </img>
+
+				</td>
+				<td align="center" rowspan=3>
+					<img src="P2.jpg"> </img>
+				</td>
+				<td align="center" rowspan=3>
+					<button onclick="f2(6)"><img src="P3.jpg"> </img></button>
+				</td>
+				<td align="center" rowspan=3>
+					<img src="P4.jpg"> </img>
+
+				</td>
+				<td align="center" rowspan=3>
+					<img src="P5.jpg"> </img>
+ 				</td>
+			</tr> 
+			<tr>
+				<td align="center">
+				DIRECCION
+					<input type="range" id="angular" min="-10" max="10" step="1" oninput="f4(this.value)"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<ul>
+					<li style="display:inline;" id="etiq_id_0" >
+					
+					</li>
+					<li style="display:inline;" id="etiq_id_1">
+
+					</li>
+				</ul>
+				</td>
+			</tr>
+
+	 	</TABLE>
+
+</center>
+</BODY>
+
+
+
+</HTML>

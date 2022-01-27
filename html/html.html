@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="es">
+
+<HEAD>
+
+	<TITLE> Miguel Angel Rodriguez Garcia </TITLE>	
+	<meta charset="UTF-8"/>
+	<LINK href="CSS.css" rel="stylesheet" type="text/css" />
+	
+
+	
+	<script type="text/javascript" src="roslib.min.js"></script>
+    	<script type="text/javascript" src="roslib.js"></script>
+
+	<script type="text/javascript" type="text/javascript">
+	// Connecting to ROS
+     	// -----------------
+   
+     	var ros = new ROSLIB.Ros({
+       		url : 'ws://192.168.18.21:9090'
+     	});
+   
+     	ros.on('connection', function() {
+       		console.log('Connected to websocket server.');
+     	});
+   
+     	ros.on('error', function(error) {
+       		console.log('Error connecting to websocket server: ', error);
+     	});
+   
+     	ros.on('close', function() {
+       		console.log('Connection to websocket server closed.');
+     	});
+
+
+
+	var Tema_andar = new ROSLIB.Topic({
+	ros : ros,
+       	name : '/cmd_vel_deseada',
+       	messageType : 'geometry_msgs/Twist'
+       });
+
+	var mensaje = new ROSLIB.Message({
+	   linear : {
+		x : -6.5,
+		y : 0,
+		z : 0,
+     	    },
+     	    angular : {
+		x : 0,
+		y : 0,
+		z : 0,
+	    }
+     	});
+
+
+	function f1(a) {mensaje.linear.x = mensaje.linear.x + a; Tema_andar.publish(mensaje); }
+	function f2() {mensaje.linear.x = 1000; mensaje.angular.z = 0; Tema_andar.publish(mensaje); mensaje.linear.x = -6.5;}
+	function f3(a) {mensaje.angular.z = mensaje.angular.z + a; Tema_andar.publish(mensaje); }
+	function f4() {mensaje.angular.z = 0; Tema_andar.publish(mensaje); }
+	
+     	
+	</script>	
+
+</HEAD>
+
+
+
+
+
+<BODY Class="uno">
+<center><P><H2>- ROBOT EQUILIBRISTA -</H2></P>
+
+		<table WIDTH = "95%"  BORDER ="1" >
+
+			<tr>
+				<td align="center" colspan=4 rowspan=4>
+					<iframe src="http://192.168.18.21:8080/stream?topic=/camara/image_raw&type=ros_compressed" width="640" height="480" scrolling=no></iframe>
+				</td>
+				<td align="center"> 
+					<img src="E1.jpg">
+ 				</td>
+				<td align="center"> 
+					<button onclick="f1(0.5)"><img src="FLECHA-A.jpg"></img></button>
+ 				</td>
+				<td align="center">
+					<img src="E2.jpg">
+ 				</td>
+			</tr>
+			<tr>	
+				<td align="center">
+					<button onclick="f3(5)"><img src="GIRO-I.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f4()"><img src="GIRO-N.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f3(-5)"><img src="GIRO-D.jpg"> </img></button>
+ 				</td>
+			</tr>
+			<tr>	
+				<td align="center">
+					<img src="E13.jpg"> </img>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(-0.5)"><img src="FLECHA-B.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<img src="E24.jpg"> </img>
+ 				</td>
+			</tr>
+
+			<tr>
+				<td align="center">
+					<img src="E3.jpg"> </img>
+ 				</td>
+				<td align="center">
+					<button onclick="f2()"><img src="STOP.jpg"> </img></button>
+ 				</td>
+ 				<td align="center">
+					<img src="E4.jpg"> </img>
+ 				</td>
+				
+			</tr> 
+
+	 	</TABLE>
+
+</center>
+</BODY>
+
+
+
+</HTML>

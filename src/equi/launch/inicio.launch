@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  <node name="motor" type="motor" pkg="equi" respawn="false" output="screen"/>
+  <node name="camara" type="usb_cam_node" pkg="usb_cam" respawn="false" output="screen" />
+  <node name="web_server" type="web_video_server" pkg="web_video_server" output="screen" />
+</launch>

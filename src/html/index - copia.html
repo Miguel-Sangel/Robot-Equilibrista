@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="es">
+
+<HEAD>
+
+	<TITLE> Miguel Angel Rodriguez Garcia </TITLE>	
+	<meta charset="UTF-8"/>
+	<LINK href="CSS.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="//D:/roslibjs-develop/roslibjs-develop/build/roslib.min.js"></script>
+    	<script type="text/javascript" src="//D:/roslibjs-develop/roslibjs-develop/build/roslib.js"></script>
+
+	<script type="text/javascript" type="text/javascript">
+	// Connecting to ROS
+     	// -----------------
+   
+     	var ros = new ROSLIB.Ros({
+       		url : 'ws://10.42.0.1:9090'
+     	});
+   
+     	ros.on('connection', function() {
+       		console.log('Connected to websocket server.');
+     	});
+   
+     	ros.on('error', function(error) {
+       		console.log('Error connecting to websocket server: ', error);
+     	});
+   
+     	ros.on('close', function() {
+       		console.log('Connection to websocket server closed.');
+     	});
+
+
+
+	var Tema_comando = new ROSLIB.Topic({
+	ros : ros,
+       	name : '/tema_comando',
+       	messageType : 'std_msgs/Int16'
+       	});
+
+	var Tema_destino = new ROSLIB.Topic({
+	ros : ros,
+       	name : '/tema_destino',
+       	messageType : 'std_msgs/Int16'
+       	});
+
+	var dato = new ROSLIB.Message({
+	data : 0
+     	});
+
+	function f1(a) {dato.data = a; Tema_comando.publish(dato);}
+
+	function f2(a) {dato.data = a; Tema_destino.publish(dato);}
+
+//	var Tema_velocidad = new ROSLIB.Topic({
+//	ros : ros,
+//   	name : '/tema_velocidad',
+//   	messageType : 'std_msgs/Int16'
+//   	});
+
+//	var Velocidad = new ROSLIB.Message({
+//	data : 0
+//   	});
+
+//	var Tema_giro = new ROSLIB.Topic({
+//	ros : ros,
+//   	name : '/tema_giro',
+//   	messageType : 'std_msgs/Int16'
+//   	});
+
+//	var giro = new ROSLIB.Message({
+//	data : 0
+//   	});
+
+//	function f2() {Velocidad.data = (parseFloat (document.getElementById("velocidad").value));
+//			giro.data = (parseFloat (document.getElementById("angular").value));
+//			Tema_giro.publish(giro);
+//			Tema_velocidad.publish(Velocidad);
+//	}
+
+	var escucha_Etiq_0 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_0',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_0.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_0.name + ': ' + message.data);
+	  document.getElementById('etiq_id_0').innerHTML=message.data;
+       escucha_Etiq_0.unsubscribe();
+     });
+
+	var escucha_Etiq_1 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_1',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_1.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_1.name + ': ' + message.data);
+	  document.getElementById('etiq_id_1').innerHTML=message.data;
+       escucha_Etiq_1.unsubscribe();
+     });
+
+	var escucha_Etiq_2 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_2',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_2.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_2.name + ': ' + message.data);
+	  document.getElementById('etiq_id_2').innerHTML=message.data;
+       escucha_Etiq_2.unsubscribe();
+     });
+
+	var escucha_Etiq_3 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_3',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_3.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_3.name + ': ' + message.data);
+	  document.getElementById('etiq_id_3').innerHTML=message.data;
+       escucha_Etiq_3.unsubscribe();
+     });
+
+	var escucha_Etiq_4 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_4',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_4.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_4.name + ': ' + message.data);
+	  document.getElementById('etiq_id_4').innerHTML=message.data;
+       escucha_Etiq_4.unsubscribe();
+     });
+
+	var escucha_Etiq_5 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_5',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_5.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_5.name + ': ' + message.data);
+	  document.getElementById('etiq_id_5').innerHTML=message.data;
+       escucha_Etiq_5.unsubscribe();
+     });
+
+	var escucha_Etiq_6 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_6',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_6.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_6.name + ': ' + message.data);
+	  document.getElementById('etiq_id_6').innerHTML=message.data;
+       escucha_Etiq_6.unsubscribe();
+     });
+
+	var escucha_Etiq_7 = new ROSLIB.Topic({
+       ros : ros,
+       name : '/tema_Eti_7',
+       messageType : 'std_msgs/Int16'
+     });
+  
+     escucha_Etiq_7.subscribe(function(message) {
+       console.log('Received message on ' + escucha_Etiq_7.name + ': ' + message.data);
+	  document.getElementById('etiq_id_7').innerHTML=message.data;
+       escucha_Etiq_7.unsubscribe();
+     });
+
+	</script>	
+
+</HEAD>
+
+
+
+
+
+<BODY Class="uno">
+<center><P><H2>- CONTROLADOR AGV -</H2></P>
+
+		<table WIDTH = "95%"  BORDER ="1" >
+
+			<tr>
+				<td align="center" colspan=3 rowspan=2>
+					<iframe src="http://10.42.0.1:8080/stream?topic=/usb_cam/image_raw&type=ros_compressed" width="600" height="350" scrolling=no></iframe>
+				</td>
+				<td align="center"> 
+					<button onclick="f1(3)"><img src="FLECHA-I.jpg"> </img></button>
+ 				</td>
+				<td align="center"> 
+					<button onclick="f1(1)"><img src="FLECHA-A.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(2)"><img src="FLECHA-D.jpg"> </img></button>
+ 				</td>
+			</tr>
+			<tr>	
+				<td align="center">
+					<button onclick="f1(5)"><img src="GIRO-I.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(0)"><img src="STOP.jpg"> </img></button>
+ 				</td>
+				<td align="center">
+					<button onclick="f1(4)"><img src="GIRO-D.jpg"> </img></button>
+ 				</td>
+			</tr>
+			<tr>
+				<td rowspan=2 width=200>
+					espacio reservado
+				</td>
+				<td>
+					<div id="etiq_id_0"></div>
+
+				</td>
+				<td>
+					<div id="etiq_id_1"></div>
+
+				</td>
+				<td>
+					<div id="etiq_id_2"></div>
+
+				</td>
+				<td>
+					<div id="etiq_id_3"></div>
+
+				</td>
+				<td>
+					<div id="etiq_id_4"></div>
+
+				</td>
+			</tr> 
+			<tr>
+				<td>
+					<div id="etiq_id_5"></div>
+
+				</td>
+				<td>
+					<div id="etiq_id_6"></div>
+				</td>
+				<td>
+					-
+				</td>
+				<td>
+					<div id="etiq_id_7"></div>
+
+				</td>
+				<td align="center">
+					<button onclick="f2(1)"><img src="codigo.jpg"> </img></button>
+ 				</td>
+			</tr> 
+
+	 	</TABLE>
+
+</center>
+</BODY>
+
+
+
+</HTML>
